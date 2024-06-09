@@ -1,19 +1,24 @@
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Epic extends Task {
-    ArrayList<Integer> itemIds = new ArrayList<>();
+    private ArrayList<Integer> itemIds = new ArrayList<>();
 
-    public Epic(String taskname, int id, Status status, ArrayList<Integer> itemIds) {
-        super(taskname, id, status);
-        this.itemIds = itemIds;
-
+    public Epic(int id, String taskname, String description) {
+        super(id, taskname, description);
     }
 
 
     @Override
     public String toString() {
-        return "Задача ЭПИК: " + taskname + ". " + "Id задачи: " + id + ". Статус задачи: " + status;
+        return "Задача ЭПИК: " + getTaskname() + ". " + "Id задачи: " + getId() + ". Статус задачи: " + getStatus();
 
+    }
+
+    public ArrayList<Integer> getItemIds() {
+        return itemIds;
+    }
+
+    public void setItemIds(ArrayList<Integer> itemIds) {
+        this.itemIds = itemIds;
     }
 }

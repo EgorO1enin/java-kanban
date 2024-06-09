@@ -1,15 +1,18 @@
 public class Subtusk extends Task {
-    int colId;
+    private final int epicId;
 
-
-    public Subtusk(String taskname, int id, Status status, int colId) {
-        super(taskname, id, status);
-        this.colId = colId;
+    public Subtusk(int id, String taskname, String description, int epicId) {
+        super(id, taskname, description);
+        this.epicId = epicId;
     }
 
 
     @Override
     public String toString() {
-        return "Подзадача: " + taskname + ". " + "id " + id + ". Статус задачи: " + status;
+        return "Подзадача: " + getTaskname() + ". " + "id " + getId() + ". Статус задачи: " + getStatus();
+    }
+
+    public int getEpicId() {
+        return epicId;
     }
 }
