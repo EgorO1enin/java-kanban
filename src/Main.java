@@ -26,7 +26,7 @@ public class Main {
                 String task = scannerForString.nextLine();
                 System.out.println("Введите описание задачи: ");
                 String description = scannerForString.nextLine();
-                Task task1 = new Task(taskManager.taskId, task, description);
+                Task task1 = new Task(task, description);
                 taskManager.addTask(task1);
                 System.out.println("Задача успешно добавлена!");
             } else if (cmd == 2) {
@@ -34,7 +34,7 @@ public class Main {
                 String epicTask = scannerForString.nextLine();
                 System.out.println("Введите описание задачи: ");
                 String description = scannerForString.nextLine();
-                Epic task = new Epic(taskManager.taskId, epicTask, description);
+                Epic task = new Epic(epicTask, description);
                 taskManager.addEpic(task);
                 System.out.println("Сколько вы хотите добавить доп заданий?");
                 int ammountOfTasks = scanner.nextInt();
@@ -43,9 +43,9 @@ public class Main {
                     String subtaskName = scannerForString.nextLine();
                     System.out.println("Введите описание задачи: ");
                     String descriptionForSubtasks = scannerForString.nextLine();
-                    Subtusk subtusk = new Subtusk(taskManager.taskId, subtaskName, descriptionForSubtasks, task.getId());
+                    Subtusk subtusk = new Subtusk(subtaskName, descriptionForSubtasks, task.getId());
                     indexOfSubtaskInEpic.add(taskManager.taskId);
-                    task.setItemIds(indexOfSubtaskInEpic);
+                    task.setSubTaskList(indexOfSubtaskInEpic);
                     taskManager.addSubtusk(subtusk);
                 }
                 indexOfSubtaskInEpic = new ArrayList<>();
@@ -67,7 +67,7 @@ public class Main {
                         System.out.println(taskManager.getEpicTask().get(i));
                         System.out.println("Описание задачи: ");
                         System.out.println(taskManager.getEpicTask().get(i).getDescription());
-                        for (int j : taskManager.getEpicTask().get(i).getItemIds()) {
+                        for (int j : taskManager.getEpicTask().get(i).getSubTaskList()) {
                             if (taskManager.getSubTusk().containsKey(j)) {
                                 System.out.println(taskManager.getSubTusk().get(j));
                                 System.out.println("Описание задачи: ");
@@ -83,12 +83,13 @@ public class Main {
             }else if (cmd == 4){
                 System.out.println("Введите айди Эпика для которого хотите вывести подзадачи");
                 int id = scanner.nextInt();
-                if (taskManager.getEpicTask().get(id).getItemIds().isEmpty()){
+                if (taskManager.getEpicTask().get(id).getSubTaskList().isEmpty()){
                     System.out.println("В данном эпике нет подзадач!");
                 } else {
-                    for (int j : taskManager.getEpicTask().get(id).getItemIds()) {
+                    for (int j : taskManager.getEpicTask().get(id).getSubTaskList()) {
                         if (taskManager.getSubTusk().containsKey(j)) {
                             System.out.println(taskManager.getSubTusk().get(j));
+                            System.out.println(taskManager.getSubTusk().get(j).getDescription());
                         }
                     }
                 }
@@ -110,7 +111,7 @@ public class Main {
                     taskManager.changeStatusOfSubTask(changeTaskId, status);
                     System.out.println("Статус успешно изменен!");
                 } else if (taskManager.getEpicTask().containsKey(changeTaskId)) {
-                    if (taskManager.getEpicTask().get(changeTaskId).getItemIds().isEmpty()) {
+                    if (taskManager.getEpicTask().get(changeTaskId).getSubTaskList().isEmpty()) {
                         taskManager.changeStatusOfEpiceTask(changeTaskId, status);
                         System.out.println("Статус успешно изменен!");
                     } else {

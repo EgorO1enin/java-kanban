@@ -1,8 +1,8 @@
 public class Subtusk extends Task {
     private final int epicId;
 
-    public Subtusk(int id, String taskname, String description, int epicId) {
-        super(id, taskname, description);
+    public Subtusk(String taskname, String description, int epicId) {
+        super(taskname, description);
         this.epicId = epicId;
     }
 
@@ -15,4 +15,10 @@ public class Subtusk extends Task {
     public int getEpicId() {
         return epicId;
     }
+
+    public void setEpicId(int id) {
+        this.id = id;
+    }
+
+
 }

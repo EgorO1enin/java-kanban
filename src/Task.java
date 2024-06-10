@@ -1,11 +1,10 @@
 public class Task {
-    private int id;
+    protected int id;
     private String taskname;
     private Status status;
     private String description;
 
-    public Task(int id, String taskname, String description) {
-        this.id = id;
+    public Task(String taskname, String description) {
         this.taskname = taskname;
         this.status = Status.NEW;
         this.description = description;
@@ -40,6 +39,14 @@ public class Task {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void setTaskname(String taskname) {
+        this.taskname = taskname;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
 

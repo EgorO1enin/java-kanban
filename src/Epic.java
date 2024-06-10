@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
 public class Epic extends Task {
-    private ArrayList<Integer> itemIds = new ArrayList<>();
+    private ArrayList<Integer> subTaskList = new ArrayList<>();
 
-    public Epic(int id, String taskname, String description) {
-        super(id, taskname, description);
+    public Epic(String taskname, String description) {
+        super(taskname, description);
     }
 
 
@@ -14,11 +14,12 @@ public class Epic extends Task {
 
     }
 
-    public ArrayList<Integer> getItemIds() {
-        return itemIds;
+    public ArrayList<Integer> getSubTaskList() {
+        return subTaskList;
     }
 
-    public void setItemIds(ArrayList<Integer> itemIds) {
-        this.itemIds = itemIds;
+    public void setSubTaskList(ArrayList<Integer> subTaskList) {
+        this.subTaskList = subTaskList;
     }
+
 }
