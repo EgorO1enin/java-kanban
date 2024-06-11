@@ -1,11 +1,10 @@
-public class Subtusk extends Task {
+public class Subtask extends Task {
     private final int epicId;
 
-    public Subtusk(String taskname, String description, int epicId) {
+    public Subtask(String taskname, String description, int epicId) {
         super(taskname, description);
         this.epicId = epicId;
     }
-
 
     @Override
     public String toString() {

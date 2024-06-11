@@ -1,27 +1,33 @@
 import java.util.HashMap;
+import java.util.ArrayList;
 
 public class TaskManager {
     int taskId = 1;
     private final HashMap<Integer, Task> tasksList = new HashMap<>();
     private final HashMap<Integer, Epic>  epicsList = new HashMap<>();
-    private final HashMap<Integer, Subtusk> subtasksList = new HashMap<>();
+    private final HashMap<Integer, Subtask> subtasksList = new HashMap<>();
 
-    public void addTask(Task task){ // Добавление простой задачи
+    public int addTask(Task task){ // Добавление простой задачи
         task.setId(taskId);
         taskId++;
         tasksList.put(task.getId(), task);
+        return task.id;
     }
 
-    public void addEpic(Epic epTask){ // Добавление эпика
+    public int addEpic(Epic epTask){ // Добавление эпика
         epTask.setId(taskId);
         taskId++;
         epicsList.put(epTask.getId(), epTask);
+        return epTask.id;
     }
 
-    public void addSubtusk (Subtusk subTask){
+    public int addSubtusk (Subtask subTask){
         subTask.setId(taskId);
+        Epic epic = epicsList.get(subTask.getEpicId());
+        epic.setSubTaskList(taskId);
         taskId++;
         subtasksList.put(subTask.getId(), subTask);
+        return subTask.id;
     }
 
     public void deleteAllTasks(){
@@ -51,32 +57,6 @@ public class TaskManager {
         epicsList.get(id).setStatus(epicStatus);
     }
 
-    public void changeStatusOfSimpleTask(int id, Status simpleStatus){
-       tasksList.get(id).setStatus(simpleStatus);
-    }
-
-    public void changeStatusOfSubTask(int id, Status subStatus){
-        subtasksList.get(id).setStatus(subStatus);
-        int epicTaskId = subtasksList.get(id).getEpicId();
-        int countDone = 0;
-        int countInProgress = 0;
-        int size = subtasksList.size();
-        for (int i : epicsList.get(epicTaskId).getSubTaskList()){
-            if (subtasksList.get(i).getStatus() == Status.DONE){
-                countDone++;
-            } else if (subtasksList.get(i).getStatus() == Status.IN_PROGRESS){
-                countInProgress++;
-            }
-        }
-        if (size == countDone){
-            epicsList.get(epicTaskId).setStatus(Status.DONE);
-        } else if (countInProgress >= 1 || (countDone >= 1 && countDone < size)){
-            epicsList.get(epicTaskId).setStatus(Status.IN_PROGRESS);
-        } else {
-            epicsList.get(epicTaskId).setStatus(Status.NEW);
-        }
-    }
-
     public HashMap<Integer, Task> getSimpleTask() {
         return tasksList;
     }
@@ -85,7 +65,53 @@ public class TaskManager {
         return epicsList;
     }
 
-    public HashMap<Integer, Subtusk> getSubTusk() {
+    public HashMap<Integer, Subtask> getSubTask() {
         return subtasksList;
     }
+
+    public void updateTask(Task task){
+        if (tasksList.containsKey(task.getId())) {
+            tasksList.put(task.getId(), task);
+        }
+    }
+
+    public void updateEpic(Epic epic){
+        if (epicsList.containsKey(epic.getId())) {
+            epicsList.put(epic.getId(), epic);
+        }
+    }
+
+    private void updateStatusEpic(Epic epic){
+        ArrayList <Subtask> subtasks = new ArrayList<>();
+        int countNew = 0;
+        int countDone = 0;
+        for (int i = 0; i < epic.getSubTaskList().size(); i++){
+            subtasks.add(subtasksList.get(epic.getSubTaskList().get(i)));
+        }
+
+        for (Subtask subTusk : subtasks){
+            if (subTusk.getStatus() == Status.DONE){
+                countDone++;
+            }else if (subTusk.getStatus() == Status.NEW){
+                countNew++;
+            }
+        }
+
+        if (subtasks.size() == countDone){
+            epic.setStatus(Status.DONE);
+        } else if (countNew == subtasks.size()){
+            epic.setStatus(Status.NEW);
+        } else{
+            epic.setStatus(Status.IN_PROGRESS);
+        }
+
+    }
+
+    public void updateSubtask(Subtask subtask){
+        subtasksList.put(subtask.getId(), subtask);
+        Epic epic = epicsList.get(subtask.getEpicId());
+        updateStatusEpic(epic);
+
+    }
 }
+

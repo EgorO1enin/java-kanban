@@ -1,15 +1,14 @@
 public class Task {
     protected int id;
-    private String taskname;
-    private Status status;
-    private String description;
+    protected String taskname;
+    protected Status status;
+    protected String description;
 
     public Task(String taskname, String description) {
         this.taskname = taskname;
         this.status = Status.NEW;
         this.description = description;
     }
-
 
     @Override
     public String toString() {

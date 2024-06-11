@@ -7,7 +7,6 @@ public class Epic extends Task {
         super(taskname, description);
     }
 
-
     @Override
     public String toString() {
         return "Задача ЭПИК: " + getTaskname() + ". " + "Id задачи: " + getId() + ". Статус задачи: " + getStatus();
@@ -18,8 +17,8 @@ public class Epic extends Task {
         return subTaskList;
     }
 
-    public void setSubTaskList(ArrayList<Integer> subTaskList) {
-        this.subTaskList = subTaskList;
+    public void setSubTaskList(int id) {
+        subTaskList.add(id);
     }
 
 }
