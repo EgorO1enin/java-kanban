@@ -1,8 +1,23 @@
+import java.util.Objects;
+
 public class Task {
     protected int id;
     protected String taskname;
     protected Status status;
     protected String description;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return id == task.id && Objects.equals(taskname, task.taskname) && status == task.status && Objects.equals(description, task.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, taskname, status, description);
+    }
 
     public Task(String taskname, String description) {
         this.taskname = taskname;
@@ -12,7 +27,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Задача: " + taskname + ". " + "id " + id + ". Статус задачи: " + status;
+        return "Задача: " + taskname + ". " + "Id задачи: " + id + ". Статус задачи: " + status;
 
     }
 
