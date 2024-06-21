@@ -1,10 +1,15 @@
+package tests;
+
+import Managers.InMemoryHistoryManager;
+import Managers.InMemoryTaskManager;
+import Tasks.Task;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-//InMemoryTaskManager taskManager = new InMemoryTaskManager();
+//Tasks.Managers.Managers.InMemoryTaskManager taskManager = new Tasks.Managers.Managers.InMemoryTaskManager();
 
 class TaskTest {
 
@@ -14,13 +19,13 @@ class TaskTest {
 
     @Test
     public void shouldReturnEquals(){
-        Task task1 = new Task("Task 1", "testing task");
-        Task task2 = new Task("Task 2", "testing task");
+        Task task1 = new Task("Tasks.Task 1", "testing task");
+        Task task2 = new Task("Tasks.Task 2", "testing task");
         taskManager.addTask(task1);
         taskManager.addTask(task2);
-        int id = taskManager.taskId;
-        Task firstCall = taskManager.getTask(id);
-        Task secondCall = taskManager.getTask(id);
+        int id = 1;
+        Task firstCall = taskManager.getTaskById(id);
+        Task secondCall = taskManager.getTaskById(id);
 
         assertEquals(firstCall, secondCall, "Они не равны");
     }
@@ -30,7 +35,7 @@ class TaskTest {
         Task task = new Task("Test addNewTask", "Test addNewTask description");
         final int taskId = taskManager.addTask(task);
 
-        final Task savedTask = taskManager.getTask(taskId);
+        final Task savedTask = taskManager.getTaskById(taskId);
 
         assertNotNull(savedTask, "Задача не найдена.");
         assertEquals(task, savedTask, "Задачи не совпадают.");
@@ -57,6 +62,6 @@ class TaskTest {
         Task task = new Task("Test addNewTask", "Test addNewTask description");
         //Первая задача будет под первым айди
         taskManager.addTask(task);
-        assertEquals(task, taskManager.getTask(1));
+        assertEquals(task, taskManager.getTaskById(1));
     }
 }

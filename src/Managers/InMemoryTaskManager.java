@@ -1,8 +1,15 @@
+package Managers;
+
+import Tasks.Epic;
+import Tasks.Status;
+import Tasks.Subtask;
+import Tasks.Task;
+
 import java.util.HashMap;
 import java.util.ArrayList;
 // Должен стать интерфейсом
 public class InMemoryTaskManager implements ТaskManager {
-    HistoryManager historyManager = new InMemoryHistoryManager();
+    private final HistoryManager historyManager = new InMemoryHistoryManager();
     int taskId = 1;
     private final HashMap<Integer, Task> tasksList = new HashMap<>();
     private final HashMap<Integer, Epic>  epicsList = new HashMap<>();
@@ -13,7 +20,7 @@ public class InMemoryTaskManager implements ТaskManager {
         task.setId(taskId);
         taskId++;
         tasksList.put(task.getId(), task);
-        return task.id;
+        return task.getId();
     }
 
     @Override
@@ -21,7 +28,7 @@ public class InMemoryTaskManager implements ТaskManager {
         epTask.setId(taskId);
         taskId++;
         epicsList.put(epTask.getId(), epTask);
-        return epTask.id;
+        return epTask.getId();
     }
 
     @Override
@@ -31,7 +38,7 @@ public class InMemoryTaskManager implements ТaskManager {
         epic.setSubTaskList(taskId);
         taskId++;
         subtasksList.put(subTask.getId(), subTask);
-        return subTask.id;
+        return subTask.getId();
     }
 
     @Override
@@ -64,17 +71,17 @@ public class InMemoryTaskManager implements ТaskManager {
         epicsList.get(id).setStatus(epicStatus);
     }
 
-    public Task getTask(int id){
+    public Task getTaskById(int id){
         historyManager.add(tasksList.get(id));
         return tasksList.get(id);
     }
 
-    public Task getEpic(int id){
+    public Task getEpicById(int id){
         historyManager.add(epicsList.get(id));
         return epicsList.get(id);
     }
 
-    public Task getSubtask(int id){
+    public Task getSubtaskById(int id){
         historyManager.add(subtasksList.get(id));
         return subtasksList.get(id);
     }
@@ -116,7 +123,11 @@ public class InMemoryTaskManager implements ТaskManager {
 
     }
 
-    void updateStatusEpic(Epic epic) {
+    public ArrayList<Task> getHistory(){
+        return historyManager.getHistoryList();
+    }
+
+    private void updateStatusEpic(Epic epic) {
         ArrayList<Subtask> subtasks = new ArrayList<>();
         int countNew = 0;
         int countDone = 0;

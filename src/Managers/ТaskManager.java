@@ -1,4 +1,10 @@
-import java.util.ArrayList;
+package Managers;
+
+import Tasks.Epic;
+import Tasks.Status;
+import Tasks.Subtask;
+import Tasks.Task;
+
 import java.util.HashMap;
 
 public interface ТaskManager {
