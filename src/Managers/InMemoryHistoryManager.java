@@ -21,14 +21,14 @@ public class InMemoryHistoryManager implements HistoryManager {
     }
 
     @Override
-    public void getHistory() {
+    public String getHistory() {
         if (historyList.isEmpty()){
             System.out.println("empty");
         }
         for (int i = 0; i < historyList.size(); i++) {
             System.out.println(historyList.get(i));
         }
-
+        return null;
     }
 
 }

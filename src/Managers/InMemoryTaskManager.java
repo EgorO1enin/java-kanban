@@ -123,8 +123,12 @@ public class InMemoryTaskManager implements ТaskManager {
 
     }
 
-    public ArrayList<Task> getHistory(){
+    public ArrayList<Task> getHistoryList(){
         return historyManager.getHistoryList();
+    }
+
+    public String getHistory(){
+        return historyManager.getHistory();
     }
 
     private void updateStatusEpic(Epic epic) {
