@@ -7,6 +7,8 @@ import Tasks.Task;
 
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.List;
+
 // Должен стать интерфейсом
 public class InMemoryTaskManager implements ТaskManager {
     private final HistoryManager historyManager = new InMemoryHistoryManager();
@@ -123,12 +125,20 @@ public class InMemoryTaskManager implements ТaskManager {
 
     }
 
-    public ArrayList<Task> getHistoryList(){
-        return historyManager.getHistoryList();
+
+    public List<Task> getAllHistory() {
+        return historyManager.getHistory();
     }
 
-    public String getHistory(){
-        return historyManager.getHistory();
+    public void removeTaskFromHistory(int id) {
+        if (epicsList.containsKey(id)) {
+            for (int ind : epicsList.get(id).getSubTaskList()) {
+                historyManager.remove(ind);
+            }
+            historyManager.remove(id);
+        } else {
+            historyManager.remove(id);
+        }
     }
 
     private void updateStatusEpic(Epic epic) {
@@ -138,7 +148,6 @@ public class InMemoryTaskManager implements ТaskManager {
         for (int i = 0; i < epic.getSubTaskList().size(); i++) {
             subtasks.add(subtasksList.get(epic.getSubTaskList().get(i)));
         }
-
         for (Subtask subTusk : subtasks) {
             if (subTusk.getStatus() == Status.DONE) {
                 countDone++;
@@ -146,7 +155,6 @@ public class InMemoryTaskManager implements ТaskManager {
                 countNew++;
             }
         }
-
         if (subtasks.size() == countDone) {
             epic.setStatus(Status.DONE);
         } else if (countNew == subtasks.size()) {

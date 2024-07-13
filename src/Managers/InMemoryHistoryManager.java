@@ -2,33 +2,90 @@ package Managers;
 
 import Tasks.Task;
 
-import java.util.ArrayList;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class InMemoryHistoryManager implements HistoryManager {
-    private static ArrayList<Task> historyList = new ArrayList<>();
 
-    @Override
-    public  ArrayList<Task> getHistoryList() {
-        return new ArrayList<>(historyList);
-    }
+    private Map<Integer, Node> tasks = new HashMap<>();
+    private Node head;
+    private Node tail;
 
     @Override
     public void add(Task task) {
-        if (historyList.size() == 10) {
-            historyList.remove(0);
+        int id = task.getId();
+        Node node = tasks.get(id);
+        if (node != null) { // Задача уже есть в списке
+            removeNode(node);
         }
-        historyList.add(task);
+        linkLast(task);
+        tasks.put(id, head);
+    }
+
+
+    public void removeNode(Node node) {
+        if (node != null) {
+            tasks.remove(node.task.getId());
+            Node prev = node.prev;
+            Node next = node.next;
+
+            if (prev != null) {
+                prev.next = next;
+            }
+            if (next != null) {
+                next.prev = prev;
+            }
+
+            node.prev = null;
+            node.next = null;
+
+            if (node == head) {
+                head = next;
+            }
+            if (node == tail) {
+                tail = prev;
+            }
+        }
     }
 
     @Override
-    public String getHistory() {
-        if (historyList.isEmpty()){
-            System.out.println("empty");
+    public ArrayList<Task> getHistory() {
+        ArrayList<Task> tasks = new ArrayList<>();
+        Node curEl = head;
+        while (curEl != null) {
+            tasks.add(curEl.task);
+            curEl = curEl.next;
         }
-        for (int i = 0; i < historyList.size(); i++) {
-            System.out.println(historyList.get(i));
-        }
-        return null;
+        return tasks;
     }
 
+    @Override
+    public void remove(int id){
+        Node node = null;
+        for (Node n = head; n != null; n = n.next) {
+            if (n.task.getId() == id) {
+                node = n;
+                break;
+            }
+        }
+        if (node != null) {
+            removeNode(node);
+        }
+    }
+
+    void linkLast(Task task) {
+        Node newNode = new Node(task);
+        if (head == null) {
+            head = newNode;
+        } else {
+            Node last = head;
+            while (last.next != null) {
+                last = last.next;
+            }
+            last.next = newNode;
+            newNode.prev = last;
+        }
+
+
+    }
 }
