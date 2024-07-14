@@ -97,12 +97,12 @@ public class Main {
         System.out.println(taskManager.getTaskById(11));
         //System.out.println(historyManager.getHistoryList());
         System.out.println("History befor:");
-        for (int i = 0; i < taskManager.getAllHistory().size(); i++){
+        for (int i = 0; i < taskManager.getAllHistory().size(); i++) {
             System.out.println(taskManager.getAllHistory().get(i));
         }
         System.out.println("History After:");
         taskManager.removeTaskFromHistory(1);
-        for (int i = 0; i < taskManager.getAllHistory().size(); i++){
+        for (int i = 0; i < taskManager.getAllHistory().size(); i++) {
             System.out.println(taskManager.getAllHistory().get(i));
         }
 

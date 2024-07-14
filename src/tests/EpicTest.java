@@ -15,7 +15,7 @@ class EpicTest {
 
 
     @Test
-    public void shouldReturnEquals(){
+    public void shouldReturnEquals() {
         Epic epic = new Epic("Tasks.Task 1", "testing task");
         taskManager.addEpic(epic);
         int taskId = epic.getId();

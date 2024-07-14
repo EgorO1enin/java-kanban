@@ -18,7 +18,7 @@ class TaskTest {
 
 
     @Test
-    public void shouldReturnEquals(){
+    public void shouldReturnEquals() {
         Task task1 = new Task("Tasks.Task 1", "testing task");
         Task task2 = new Task("Tasks.Task 2", "testing task");
         taskManager.addTask(task1);
@@ -58,7 +58,7 @@ class TaskTest {
     }
 
     @Test
-    void ShouldBeEqualsBeforeAndAfterAddToManager(){
+    void ShouldBeEqualsBeforeAndAfterAddToManager() {
         Task task = new Task("Test addNewTask", "Test addNewTask description");
         //Первая задача будет под первым айди
         taskManager.addTask(task);
