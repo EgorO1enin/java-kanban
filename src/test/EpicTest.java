@@ -1,4 +1,4 @@
-package tests;
+package test;
 
 import task.Epic;
 import managers.InMemoryHistoryManager;
