@@ -24,7 +24,7 @@ class InMemoryHistoryManagerTest {
 
     @Test
     void returnTrueWhenWeAddTask() {
-        Task task1 = new Task(  "task1", "Task 1");
+        Task task1 = new Task("task1", "Task 1");
         Task task2 = new Task("task2", "Task 2");
 
         taskManager.addTask(task1);
