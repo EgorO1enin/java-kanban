@@ -1,7 +1,7 @@
 package managers;
 
 public class Managers {
-    public static ТaskManager getDefault(){
+    public static ТaskManager getDefault() {
         return new InMemoryTaskManager();
     }
 
