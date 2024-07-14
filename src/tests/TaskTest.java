@@ -1,15 +1,13 @@
 package tests;
 
-import Managers.InMemoryHistoryManager;
-import Managers.InMemoryTaskManager;
-import Tasks.Task;
+import managers.InMemoryHistoryManager;
+import managers.InMemoryTaskManager;
+import task.Task;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 //Tasks.Managers.Managers.InMemoryTaskManager taskManager = new Tasks.Managers.Managers.InMemoryTaskManager();
 

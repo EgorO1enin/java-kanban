@@ -1,15 +1,14 @@
 package tests;
 
-import Managers.InMemoryHistoryManager;
-import Managers.InMemoryTaskManager;
-import Tasks.Task;
+import managers.InMemoryHistoryManager;
+import managers.InMemoryTaskManager;
+import task.Task;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 class InMemoryHistoryManagerTest {

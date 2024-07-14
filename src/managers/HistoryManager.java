@@ -1,10 +1,8 @@
-package Managers;
+package managers;
 
-import Tasks.Task;
+import task.Task;
 
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 
 public interface HistoryManager {

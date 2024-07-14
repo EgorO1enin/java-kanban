@@ -1,10 +1,9 @@
 package tests;
 
-import Tasks.Epic;
-import Managers.InMemoryHistoryManager;
-import Managers.InMemoryTaskManager;
-import Tasks.Subtask;
-import Tasks.Task;
+import task.Epic;
+import managers.InMemoryHistoryManager;
+import managers.InMemoryTaskManager;
+import task.Task;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
