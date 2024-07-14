@@ -4,10 +4,9 @@ import task.Epic;
 import task.Status;
 import task.Subtask;
 import task.Task;
-
 import java.util.HashMap;
 
-public interface ТaskManager {
+public interface TaskManager {
     int addTask(Task task);
 
     int addEpic(Epic epTask);

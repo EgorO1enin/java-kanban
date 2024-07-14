@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Должен стать интерфейсом
-public class InMemoryTaskManager implements ТaskManager {
+public class InMemoryTaskManager implements TaskManager {
     private final HistoryManager historyManager = new InMemoryHistoryManager();
     int taskId = 1;
     private final HashMap<Integer, Task> tasksList = new HashMap<>();
