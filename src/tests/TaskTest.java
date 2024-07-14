@@ -58,7 +58,7 @@ class TaskTest {
     }
 
     @Test
-    void ShouldBeEqualsBeforeAndAfterAddToManager() {
+    void shouldBeEqualsBeforeAndAfterAddToManager() {
         Task task = new Task("Test addNewTask", "Test addNewTask description");
         //Первая задача будет под первым айди
         taskManager.addTask(task);
