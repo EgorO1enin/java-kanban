@@ -5,6 +5,7 @@ import task.Status;
 import task.Subtask;
 import task.Task;
 import java.util.HashMap;
+import java.util.List;
 
 public interface TaskManager {
     int addTask(Task task);
@@ -30,4 +31,18 @@ public interface TaskManager {
     void updateEpic(Epic epic);
 
     void updateSubtask(Subtask subtask);
+
+    Task getTaskById(int id);
+
+    Task getEpicById(int id);
+
+    Task getSubtaskById(int id);
+
+    List<Task> getAllHistory();
+
+    void removeTaskFromHistory(int id);
+
+
+
+
 }

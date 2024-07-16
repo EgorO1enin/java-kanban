@@ -73,16 +73,19 @@ public class InMemoryTaskManager implements TaskManager {
         epicsList.get(id).setStatus(epicStatus);
     }
 
+    @Override
     public Task getTaskById(int id) {
         historyManager.add(tasksList.get(id));
         return tasksList.get(id);
     }
 
+    @Override
     public Task getEpicById(int id) {
         historyManager.add(epicsList.get(id));
         return epicsList.get(id);
     }
 
+    @Override
     public Task getSubtaskById(int id) {
         historyManager.add(subtasksList.get(id));
         return subtasksList.get(id);
@@ -125,10 +128,12 @@ public class InMemoryTaskManager implements TaskManager {
 
     }
 
+    @Override
     public List<Task> getAllHistory() {
         return historyManager.getHistory();
     }
 
+    @Override
     public void removeTaskFromHistory(int id) {
         if (epicsList.containsKey(id)) {
             for (int ind : epicsList.get(id).getSubTaskList()) {
