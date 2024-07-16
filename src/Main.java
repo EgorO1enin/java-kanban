@@ -1,8 +1,8 @@
-import Tasks.Epic;
-import Managers.InMemoryHistoryManager;
-import Managers.InMemoryTaskManager;
-import Tasks.Subtask;
-import Tasks.Task;
+import task.Epic;
+import managers.InMemoryHistoryManager;
+import managers.InMemoryTaskManager;
+import task.Subtask;
+import task.Task;
 
 public class Main {
 
@@ -50,7 +50,6 @@ public class Main {
         System.out.println(subtask1);
         System.out.println(subtask2);*/
         System.out.println(taskManager.getEpicById(1));
-        System.out.println(" ");
         /*System.out.println("History: ");
         historyManager.getHistory();
         System.out.println(" ");*/
@@ -96,9 +95,37 @@ public class Main {
         System.out.println("History: ");
         historyManager.getHistory();*/
         System.out.println(taskManager.getTaskById(11));
-        System.out.println(" ");
-        System.out.println("History: ");
-        historyManager.getHistory();
+        //System.out.println(historyManager.getHistoryList());
+        System.out.println("History befor:");
+        for (int i = 0; i < taskManager.getAllHistory().size(); i++) {
+            System.out.println(taskManager.getAllHistory().get(i));
+        }
+        System.out.println("History After:");
+        taskManager.removeTaskFromHistory(1);
+        for (int i = 0; i < taskManager.getAllHistory().size(); i++) {
+            System.out.println(taskManager.getAllHistory().get(i));
+        }
+
+
+
+
+
+      /*  Task task12 = new Task("task1", "Task 1");
+        Task task22 = new Task("task2", "Task 2");
+        Task task32 = new Task("task3", "Task 3");
+
+        historyManager.add(task12);
+        historyManager.add(task22);
+        historyManager.add(task32);
+        System.out.println(historyManager.getHistory());
+        System.out.println(historyManager.getHistory().size());*/
+
+
+       /* if(historyManager.mapOfTasks.isEmpty()){
+            System.out.println("null");
+        }
+        System.out.println(historyManager.getAllTasks());
+*/
 
 
 
