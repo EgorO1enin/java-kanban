@@ -8,6 +8,12 @@ public class Task {
     protected Status status;
     protected String description;
 
+    public Type getType() {
+        return type;
+    }
+
+    Type type = Type.TASK;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -9,6 +9,12 @@ public class Epic extends Task {
         super(taskname, description);
     }
 
+    public Type getType() {
+        return type;
+    }
+
+    Type type = Type.EPIC;
+
     @Override
     public String toString() {
         return "Задача ЭПИК: " + getTaskname() + ". " + "Id задачи: " + getId() + ". Статус задачи: " + getStatus();
@@ -22,5 +28,4 @@ public class Epic extends Task {
     public void setSubTaskList(int id) {
         subTaskList.add(id);
     }
-
 }
