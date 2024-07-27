@@ -3,13 +3,13 @@ package managers;
 import task.*;
 
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
 public class FileBackedTaskManager extends InMemoryTaskManager implements TaskManager {
 
     String fileName;
+
     public FileBackedTaskManager(String fileName) {
         this.fileName = fileName;
     }
@@ -117,7 +117,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
     }
 
     public String toString(Task task) {
-        return task.getId()+ "," + task.getType()+ "," +  task.getTaskname()+ ","
+        return task.getId() + "," + task.getType() + "," +  task.getTaskname() + ","
                 + task.getStatus().toString() + "," + task.getDescription();
     }
 
