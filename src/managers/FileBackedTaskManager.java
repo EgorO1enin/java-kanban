@@ -121,7 +121,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
                 + task.getStatus().toString() + "," + task.getDescription();
     }
 
-    public void save(){
+    public void save() {
         StringBuilder sb = new StringBuilder();
         sb.append("id,type,name,status,description,epic\n");
         for (Task task : getAllHistory()) {
@@ -140,9 +140,9 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
             sb.append(toString(task)).append("\n");
         }
 
-        try(FileWriter fileWriter = new FileWriter(fileName)) {
+        try (FileWriter fileWriter = new FileWriter(fileName)) {
           fileWriter.write(sb.toString());
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.print("Ошибка");
         }
     }
