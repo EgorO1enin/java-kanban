@@ -1,0 +1,7 @@
+id,type,name,status,description,epic
+1,TASK,Go to the gym,NEW,To be there at 3 AM,
+2,TASK,Have a breakfast,NEW,Meat is in the fridge,
+3,TASK,To go for meetup,NEW,No information about meetup,
+4,EPIC,Fix Bug,NEW,this bug is on main page of site,
+5,SUBTASK,To solve the problem with payment,NEW,No info how to do it,4
+6,SUBTASK,To solve the problem with region,NEW,No info how to do it,4

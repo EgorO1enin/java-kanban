@@ -1,4 +1,4 @@
-package Tasks;
+package task;
 
 import java.util.ArrayList;
 
@@ -7,12 +7,18 @@ public class Epic extends Task {
 
     public Epic(String taskname, String description) {
         super(taskname, description);
+        super.setType(Type.EPIC);
+
+    }
+
+    @Override
+    public Type getType() {
+        return super.getType();
     }
 
     @Override
     public String toString() {
         return "Задача ЭПИК: " + getTaskname() + ". " + "Id задачи: " + getId() + ". Статус задачи: " + getStatus();
-
     }
 
     public ArrayList<Integer> getSubTaskList() {
@@ -22,5 +28,4 @@ public class Epic extends Task {
     public void setSubTaskList(int id) {
         subTaskList.add(id);
     }
-
 }

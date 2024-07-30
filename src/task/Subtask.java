@@ -1,4 +1,4 @@
-package Tasks;
+package task;
 
 public class Subtask extends Task {
     private final int epicId;
@@ -6,6 +6,7 @@ public class Subtask extends Task {
     public Subtask(String taskname, String description, int epicId) {
         super(taskname, description);
         this.epicId = epicId;
+        super.setType(Type.SUBTASK);
     }
 
     @Override
@@ -20,6 +21,4 @@ public class Subtask extends Task {
     public void setEpicId(int id) {
         this.id = id;
     }
-
-
 }

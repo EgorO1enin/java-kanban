@@ -1,10 +1,7 @@
-package tests;
-
-import Tasks.Epic;
-import Managers.InMemoryHistoryManager;
-import Managers.InMemoryTaskManager;
-import Tasks.Subtask;
-import Tasks.Task;
+import task.Epic;
+import managers.InMemoryHistoryManager;
+import managers.InMemoryTaskManager;
+import task.Task;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,7 +13,7 @@ class EpicTest {
 
 
     @Test
-    public void shouldReturnEquals(){
+    public void shouldReturnEquals() {
         Epic epic = new Epic("Tasks.Task 1", "testing task");
         taskManager.addEpic(epic);
         int taskId = epic.getId();
