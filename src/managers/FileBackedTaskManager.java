@@ -161,7 +161,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager  {
 
     public static FileBackedTaskManager load(File fileName) throws FileNotFoundException {
         FileBackedTaskManager manager = new FileBackedTaskManager(fileName);
-        try(BufferedReader br = new BufferedReader(new FileReader(fileName, StandardCharsets.UTF_8))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName, StandardCharsets.UTF_8))) {
             String line = br.readLine();
             while (br.ready()) {
                 line = br.readLine();
