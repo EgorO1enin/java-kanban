@@ -118,6 +118,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager  {
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
+
     private static String getEpicIdInSubtask(Task task) {
         if (task.getType().equals(Type.SUBTASK)) {
             return Integer.toString(((Subtask)task).getEpicId());
@@ -130,7 +131,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager  {
                 + task.getStatus().toString() + "," + task.getDescription() + "," + getEpicIdInSubtask(task);
     }
 
-    public static Task fromString(String value){
+    public static Task fromString(String value) {
         String[] parts = value.split(",");
         String id = parts[0];
         String type = parts[1];
@@ -160,7 +161,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager  {
 
     public static FileBackedTaskManager load(File fileName) throws FileNotFoundException {
         FileBackedTaskManager manager = new FileBackedTaskManager(fileName);
-        try(BufferedReader br = new BufferedReader(new FileReader(fileName, StandardCharsets.UTF_8))){
+        try(BufferedReader br = new BufferedReader(new FileReader(fileName, StandardCharsets.UTF_8))) {
             String line = br.readLine();
             while (br.ready()) {
                 line = br.readLine();
