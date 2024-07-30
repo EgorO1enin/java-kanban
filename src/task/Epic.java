@@ -7,18 +7,18 @@ public class Epic extends Task {
 
     public Epic(String taskname, String description) {
         super(taskname, description);
+        super.setType(Type.EPIC);
+
     }
 
+    @Override
     public Type getType() {
-        return type;
+        return super.getType();
     }
-
-    Type type = Type.EPIC;
 
     @Override
     public String toString() {
         return "Задача ЭПИК: " + getTaskname() + ". " + "Id задачи: " + getId() + ". Статус задачи: " + getStatus();
-
     }
 
     public ArrayList<Integer> getSubTaskList() {

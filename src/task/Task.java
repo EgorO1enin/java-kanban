@@ -7,12 +7,22 @@ public class Task {
     protected String taskname;
     protected Status status;
     protected String description;
+    private Type type = Type.TASK;
+
+    public Task(String taskname, String description) {
+        this.taskname = taskname;
+        this.status = Status.NEW;
+        this.description = description;
+
+    }
 
     public Type getType() {
         return type;
     }
 
-    Type type = Type.TASK;
+    public void setType(Type type) {
+        this.type = type;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -25,12 +35,6 @@ public class Task {
     @Override
     public int hashCode() {
         return Objects.hash(id, taskname, status, description);
-    }
-
-    public Task(String taskname, String description) {
-        this.taskname = taskname;
-        this.status = Status.NEW;
-        this.description = description;
     }
 
     @Override

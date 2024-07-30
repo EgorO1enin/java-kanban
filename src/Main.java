@@ -5,33 +5,47 @@ import managers.InMemoryTaskManager;
 import task.Subtask;
 import task.Task;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         InMemoryTaskManager taskManager = new InMemoryTaskManager();
         InMemoryHistoryManager historyManager = new InMemoryHistoryManager();
-        FileBackedTaskManager fileBackedTaskManager = new FileBackedTaskManager("text.txt");
+        File file = new File("text.csv");
+        FileBackedTaskManager fileBackedTaskManager = FileBackedTaskManager.load(file);
         //Создаем задачи
         Task task1 = new Task("Go to the gym", "To be there at 3 AM");
+        fileBackedTaskManager.addTask(task1);
         Task task2 = new Task("Have a breakfast", "Meat is in the fridge");
+        fileBackedTaskManager.addTask(task2);
         Task task3 = new Task("To go for meetup", "No information about meetup");
+        fileBackedTaskManager.addTask(task3);
         Epic epic1 = new Epic("Fix Bug", "this bug is on main page of site");
+        fileBackedTaskManager.addEpic(epic1);
         Subtask subtask1 = new Subtask("To solve the problem with payment",
                 "No info how to do it", epic1.getId());
+        fileBackedTaskManager.addSubtusk(subtask1);
         Subtask subtask2 = new Subtask("To solve the problem with region",
                 "No info how to do it", epic1.getId());
+        fileBackedTaskManager.addSubtusk(subtask2);
         Subtask subtask3 = new Subtask("To solve the problem with log page",
                 "No info how to do it", epic1.getId());
-        //Добавляем задачи
-        fileBackedTaskManager.addTask(task1);
-        fileBackedTaskManager.addTask(task2);
-        fileBackedTaskManager.addTask(task3);
-        fileBackedTaskManager.addTask(epic1);
-        fileBackedTaskManager.addTask(subtask1);
-        fileBackedTaskManager.addTask(subtask2);
-        fileBackedTaskManager.addTask(subtask3);
+        fileBackedTaskManager.addSubtusk(subtask3);
 
-        System.out.println("History befor:");
+        //Добавляем задачи
+        //fileBackedTaskManager.addTask(task1);
+        //fileBackedTaskManager.addTask(task2);
+        //fileBackedTaskManager.addTask(task3);
+
+        //fileBackedTaskManager.addSubtusk(subtask1);
+        //fileBackedTaskManager.addSubtusk(subtask2);
+        //fileBackedTaskManager.addSubtusk(subtask3);
+        //System.out.println(fileBackedTaskManager.getSimpleTaskList());
+
+
+        /*System.out.println("History befor:");
         for (int i = 0; i < fileBackedTaskManager.getAllHistory().size(); i++) {
             System.out.println(fileBackedTaskManager.getAllHistory().get(i));
         }
@@ -40,6 +54,17 @@ public class Main {
         for (int i = 0; i < fileBackedTaskManager.getAllHistory().size(); i++) {
             System.out.println(fileBackedTaskManager.getAllHistory().get(i));
         }
+*/
+
+
+        System.out.println(fileBackedTaskManager.getSimpleTaskList());
+        System.out.println(fileBackedTaskManager.getEpicTaskList());
+        System.out.println(fileBackedTaskManager.getSubTaskList());
+
+
+
+
+
         //Создаем задачи!
         /*Epic epic1 = new Epic("Эпик 1", "Нужно сделать");
         int epic1Id = taskManager1.addEpic(epic1);
