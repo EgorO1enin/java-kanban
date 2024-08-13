@@ -36,7 +36,7 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public int addEpic(Epic epTask) {
         boolean hasOverlap = taskTreeSet.stream().anyMatch(existingTask -> areTasksOverlapping(existingTask, epTask));
-        if (!hasOverlap) {// Добавление эпика
+        if (!hasOverlap) {
             addTaskToSortedTreeSet(epTask);
             epTask.setId(taskId);
             taskId++;
