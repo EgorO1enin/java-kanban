@@ -31,8 +31,6 @@ public class InMemoryTaskManager implements TaskManager {
             System.out.println("Происходит наложение Task");
             return 0;
         }
-
-
     }
 
     @Override
@@ -44,7 +42,7 @@ public class InMemoryTaskManager implements TaskManager {
             taskId++;
             epicsList.put(epTask.getId(), epTask);
             return epTask.getId();
-        }else {
+        } else {
             System.out.println("Происходит наложение Epic");
             return 0;
         }
@@ -80,7 +78,6 @@ public class InMemoryTaskManager implements TaskManager {
         } else {
             System.out.println("Задача под таким индексом не найдена!");
         }
-
     }
 
     @Override
@@ -143,7 +140,6 @@ public class InMemoryTaskManager implements TaskManager {
         subtasksList.put(subtask.getId(), subtask);
         Epic epic = epicsList.get(subtask.getEpicId());
         updateStatusEpic(epic);
-
     }
 
     @Override
