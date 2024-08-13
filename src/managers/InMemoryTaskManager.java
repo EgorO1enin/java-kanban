@@ -201,7 +201,7 @@ public class InMemoryTaskManager implements TaskManager {
         taskTreeSet.add(task);
     }
 
-    public void initEpicDuration(Epic epic, Subtask firstSub, Subtask lastSub){
+    public void initEpicDuration(Epic epic, Subtask firstSub, Subtask lastSub) {
        epic.setDuration(Duration.between(firstSub.getStartTime(), lastSub.getEndTime()));
     }
 
