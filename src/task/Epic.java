@@ -16,7 +16,6 @@ public class Epic extends Task {
     public Epic(String taskname, String description, LocalDateTime startTime, Duration duration) {
         super(taskname, description, startTime, duration);
         super.setType(Type.EPIC);
-
     }
 
     @Override
@@ -36,7 +35,6 @@ public class Epic extends Task {
     public void setSubTaskList(int id) {
         subTaskList.add(id);
     }
-
 
     public void setSubTaskList(ArrayList<Integer> subTaskList) {
         this.subTaskList = subTaskList;
