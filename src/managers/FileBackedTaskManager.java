@@ -4,12 +4,15 @@ import task.*;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.List;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.*;
 
-public class FileBackedTaskManager extends InMemoryTaskManager  {
+public class FileBackedTaskManager extends InMemoryTaskManager {
 
     private final File fileName;
+    /*CompareTasks compareTasks = new CompareTasks();
+    private TreeSet<Task> taskTreeSet = new TreeSet<>(compareTasks);*/
 
     public FileBackedTaskManager(File fileName) {
         this.fileName = fileName;
@@ -17,21 +20,26 @@ public class FileBackedTaskManager extends InMemoryTaskManager  {
 
     @Override
     public int addTask(Task task) {
+        super.addTask(task);
+        //addTaskToSortedTreeSet(task);
         save();
-        return super.addTask(task);
-
+        return task.getId();
     }
 
     @Override
     public int addEpic(Epic epTask) {
+        super.addEpic(epTask);
+        //addTaskToSortedTreeSet(epTask);
         save();
-        return super.addEpic(epTask);
+        return epTask.getId();
     }
 
     @Override
     public int addSubtusk(Subtask subTask) {
+        super.addSubtusk(subTask);
+        //addTaskToSortedTreeSet(subTask);
         save();
-        return super.addSubtusk(subTask);
+        return subTask.getId();
     }
 
     @Override
@@ -118,17 +126,25 @@ public class FileBackedTaskManager extends InMemoryTaskManager  {
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
+    /*public void addTaskToSortedTreeSet(Task task) {
+        if (task.getStartTime() == null) {
+            return;
+        }
+        taskTreeSet.add(task);
+    }*/
 
     private static String getEpicIdInSubtask(Task task) {
         if (task.getType().equals(Type.SUBTASK)) {
-            return Integer.toString(((Subtask)task).getEpicId());
+            return Integer.toString(((Subtask) task).getEpicId());
         }
         return "";
     }
 
     public String toString(Task task) {
-        return task.getId() + "," + task.getType() + "," + task.getTaskname() + ","
-                + task.getStatus().toString() + "," + task.getDescription() + "," + getEpicIdInSubtask(task);
+        return task.getId() + ","
+                + task.getType() + "," + task.getTaskname() + ","
+                + task.getStatus().toString() + "," + task.getDescription() + ","
+                + task.getStartTime() + "," + task.getEndTime() + "," + task.getDuration().toMinutes() + "," + getEpicIdInSubtask(task);
     }
 
     public static Task fromString(String value) {
@@ -138,24 +154,36 @@ public class FileBackedTaskManager extends InMemoryTaskManager  {
         String name = parts[2];
         String status = parts[3];
         String description = parts[4];
-        Integer idOfEpic = type.equals(Type.SUBTASK.toString()) ? Integer.valueOf(parts[5]) : null;
+        LocalDateTime startTime = LocalDateTime.parse(parts[5]);
+        LocalDateTime endTime = LocalDateTime.parse(parts[6]);
+        Duration duration = Duration.ofMinutes((Long.parseLong(parts[7])));
+        Integer idOfEpic = type.equals(Type.SUBTASK.toString()) ? Integer.valueOf(parts[8]) : null;
+
+
         switch (type) {
             case "TASK":
                 Task task = new Task(name, description);
                 task.setId(Integer.parseInt(id));
                 task.setStatus(Status.valueOf(status.toUpperCase()));
+                task.setStartTime(startTime);
+                task.setDuration(duration);
                 return task;
             case "EPIC":
                 Epic epic = new Epic(name, description);
                 epic.setId(Integer.parseInt(id));
                 epic.setStatus(Status.valueOf(status.toUpperCase()));
+                epic.setStartTime(startTime);
+                epic.setDuration(duration);
                 return epic;
             case "SUBTASK":
                 Subtask subtask = new Subtask(name, description, idOfEpic);
                 subtask.setId(Integer.parseInt(id));
+                subtask.setStatus(Status.valueOf(status.toUpperCase()));
+                subtask.setStartTime(startTime);
+                subtask.setDuration(duration);
                 return subtask;
             default:
-                    return null;
+                return null;
         }
     }
 
@@ -184,7 +212,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager  {
 
     private void save() {
         StringBuilder sb = new StringBuilder();
-        sb.append("id,type,name,status,description,epic\n");
+        sb.append("id,type,name,status,description,start time, end time, duration, epic\n");
         for (Task task : getSimpleTaskList().values()) {
             sb.append(toString(task)).append("\n");
         }
@@ -195,11 +223,20 @@ public class FileBackedTaskManager extends InMemoryTaskManager  {
             }
         }
         try (FileWriter fileWriter = new FileWriter(fileName)) {
-          fileWriter.write(sb.toString());
+            fileWriter.write(sb.toString());
         } catch (Exception e) {
             System.out.print("Ошибка");
         }
     }
+    /*public Set<Task> getPrioritizedTasks() {
+        return taskTreeSet;
+    }*/
 
+    /*public void printSortedTaskList() {
+        System.out.println(taskTreeSet.toString());
+    }*/
 
+    /*public boolean areTasksOverlapping(Task task1, Task task2) {
+        return task1.getStartTime().isBefore(task2.getEndTime()) && task2.getStartTime().isBefore(task1.getEndTime());
+    }*/
 }

@@ -42,7 +42,6 @@ class InMemoryHistoryManagerTest {
         Task task1 = new Task("task1", "Task 1");
         Task task2 = new Task("task2", "Task 2");
         Task task3 = new Task("task3", "Task 3");
-
         taskManager.addTask(task1);
         taskManager.addTask(task2);
         taskManager.addTask(task3);
@@ -50,17 +49,11 @@ class InMemoryHistoryManagerTest {
         taskManager.getTaskById(2);
         taskManager.getTaskById(3);
         taskManager.removeTaskFromHistory(3);
-
-
-
-
         List<Task> history = taskManager.getAllHistory();
         assertEquals(2, history.size());
         assertEquals(task1, history.get(0));
         assertEquals(task2, history.get(1));
     }
-
-
 
     @Test
     void returnTrueWhenWetGetHistory() {

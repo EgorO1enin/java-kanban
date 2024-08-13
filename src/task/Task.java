@@ -1,5 +1,9 @@
 package task;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Task {
@@ -8,12 +12,26 @@ public class Task {
     protected Status status;
     protected String description;
     private Type type = Type.TASK;
+    private Duration duration;
+    private LocalDateTime startTime;
 
+    public Task(String taskname, String description, LocalDateTime startTime, Duration duration) {
+        this.taskname = taskname;
+        this.status = Status.NEW;
+        this.description = description;
+        this.startTime = startTime;
+        this.duration = duration;
+
+    }
     public Task(String taskname, String description) {
         this.taskname = taskname;
         this.status = Status.NEW;
         this.description = description;
 
+    }
+
+    public LocalDateTime getEndTime(){
+        return startTime.plus(duration);
     }
 
     public Type getType() {
@@ -73,6 +91,23 @@ public class Task {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Duration getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Duration duration) {
+        this.duration = duration;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+        }
+
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
     }
 }
 

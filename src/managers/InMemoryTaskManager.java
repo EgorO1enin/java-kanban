@@ -5,36 +5,54 @@ import task.Status;
 import task.Subtask;
 import task.Task;
 
-import java.util.HashMap;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.Duration;
+import java.util.*;
 
 // Должен стать интерфейсом
 public class InMemoryTaskManager implements TaskManager {
     private final HistoryManager historyManager = new InMemoryHistoryManager();
     int taskId = 1;
-    private final HashMap<Integer, Task> tasksList = new HashMap<>();
-    private final HashMap<Integer, Epic>  epicsList = new HashMap<>();
-    private final HashMap<Integer, Subtask> subtasksList = new HashMap<>();
+    protected final HashMap<Integer, Task> tasksList = new HashMap<>();
+    protected final HashMap<Integer, Epic>  epicsList = new HashMap<>();
+    protected final HashMap<Integer, Subtask> subtasksList = new HashMap<>();
+    CompareTasks compareTasks = new CompareTasks();
+    protected TreeSet<Task> taskTreeSet = new TreeSet<>(compareTasks);
 
     @Override
-    public int addTask(Task task) { // Добавление простой задачи
-        task.setId(taskId);
-        taskId++;
-        tasksList.put(task.getId(), task);
-        return task.getId();
+    public int addTask(Task task) {
+        boolean hasOverlap = taskTreeSet.stream().anyMatch(existingTask -> areTasksOverlapping(existingTask, task));
+        if (!hasOverlap) {
+            addTaskToSortedTreeSet(task);
+            task.setId(taskId);
+            taskId++;
+            tasksList.put(task.getId(), task);
+            return task.getId();
+        } else {
+            System.out.println("Происходит наложение Task");
+            return 0;
+        }
+
+
     }
 
     @Override
-    public int addEpic(Epic epTask) { // Добавление эпика
-        epTask.setId(taskId);
-        taskId++;
-        epicsList.put(epTask.getId(), epTask);
-        return epTask.getId();
+    public int addEpic(Epic epTask) {
+        boolean hasOverlap = taskTreeSet.stream().anyMatch(existingTask -> areTasksOverlapping(existingTask, epTask));
+        if (!hasOverlap) {// Добавление эпика
+            addTaskToSortedTreeSet(epTask);
+            epTask.setId(taskId);
+            taskId++;
+            epicsList.put(epTask.getId(), epTask);
+            return epTask.getId();
+        }else {
+            System.out.println("Происходит наложение Epic");
+            return 0;
+        }
     }
 
     @Override
     public int addSubtusk(Subtask subTask) {
+        addTaskToSortedTreeSet(subTask);
         subTask.setId(taskId);
         Epic epic = epicsList.get(subTask.getEpicId());
         epic.setSubTaskList(taskId);
@@ -167,5 +185,39 @@ public class InMemoryTaskManager implements TaskManager {
             epic.setStatus(Status.IN_PROGRESS);
         }
     }
+
+    public void printSortedTaskList() {
+        System.out.println(taskTreeSet.toString());
+    }
+
+    public boolean areTasksOverlapping(Task task1, Task task2) {
+        return task1.getStartTime().isBefore(task2.getEndTime()) && task2.getStartTime().isBefore(task1.getEndTime());
+    }
+
+    public Set<Task> getPrioritizedTasks() {
+        return taskTreeSet;
+    }
+
+    public void addTaskToSortedTreeSet(Task task) {
+        if (task.getStartTime() == null) {
+            return;
+        }
+        taskTreeSet.add(task);
+    }
+
+    public void initEpicDuration(Epic epic, Subtask firstSub, Subtask lastSub){
+       epic.setDuration(Duration.between(firstSub.getStartTime(), lastSub.getEndTime()));
+    }
+
+
+
+
+
+
+
+
+
+
+
 }
 
