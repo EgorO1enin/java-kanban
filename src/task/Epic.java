@@ -13,6 +13,7 @@ public class Epic extends Task {
         super.setType(Type.EPIC);
 
     }
+
     public Epic(String taskname, String description, LocalDateTime startTime, Duration duration) {
         super(taskname, description, startTime, duration);
         super.setType(Type.EPIC);
