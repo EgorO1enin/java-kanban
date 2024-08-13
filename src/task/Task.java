@@ -2,8 +2,6 @@ package task;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Task {
@@ -21,13 +19,12 @@ public class Task {
         this.description = description;
         this.startTime = startTime;
         this.duration = duration;
-
     }
+
     public Task(String taskname, String description) {
         this.taskname = taskname;
         this.status = Status.NEW;
         this.description = description;
-
     }
 
     public LocalDateTime getEndTime(){
@@ -103,8 +100,7 @@ public class Task {
 
     public LocalDateTime getStartTime() {
         return startTime;
-        }
-
+    }
 
     public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
