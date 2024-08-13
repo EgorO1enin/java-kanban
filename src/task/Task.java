@@ -27,7 +27,7 @@ public class Task {
         this.description = description;
     }
 
-    public LocalDateTime getEndTime(){
+    public LocalDateTime getEndTime() {
         return startTime.plus(duration);
     }
 
