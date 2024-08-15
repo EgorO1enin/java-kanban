@@ -10,17 +10,17 @@ public class Epic extends Task {
 
     public Epic(String taskname, String description) {
         super(taskname, description);
-        super.setType(Type.EPIC);
+        super.setType(TaskType.EPIC);
 
     }
 
     public Epic(String taskname, String description, LocalDateTime startTime, Duration duration) {
         super(taskname, description, startTime, duration);
-        super.setType(Type.EPIC);
+        super.setType(TaskType.EPIC);
     }
 
     @Override
-    public Type getType() {
+    public TaskType getType() {
         return super.getType();
     }
 

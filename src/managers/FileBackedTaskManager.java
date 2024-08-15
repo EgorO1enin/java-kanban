@@ -11,8 +11,6 @@ import java.util.*;
 public class FileBackedTaskManager extends InMemoryTaskManager {
 
     private final File fileName;
-    /*CompareTasks compareTasks = new CompareTasks();
-    private TreeSet<Task> taskTreeSet = new TreeSet<>(compareTasks);*/
 
     public FileBackedTaskManager(File fileName) {
         this.fileName = fileName;
@@ -37,7 +35,6 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     @Override
     public int addSubtusk(Subtask subTask) {
         super.addSubtusk(subTask);
-        //addTaskToSortedTreeSet(subTask);
         save();
         return subTask.getId();
     }
@@ -126,15 +123,9 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
-    /*public void addTaskToSortedTreeSet(Task task) {
-        if (task.getStartTime() == null) {
-            return;
-        }
-        taskTreeSet.add(task);
-    }*/
 
     private static String getEpicIdInSubtask(Task task) {
-        if (task.getType().equals(Type.SUBTASK)) {
+        if (task.getType().equals(TaskType.SUBTASK)) {
             return Integer.toString(((Subtask) task).getEpicId());
         }
         return "";
@@ -157,7 +148,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         LocalDateTime startTime = LocalDateTime.parse(parts[5]);
         LocalDateTime endTime = LocalDateTime.parse(parts[6]);
         Duration duration = Duration.ofMinutes((Long.parseLong(parts[7])));
-        Integer idOfEpic = type.equals(Type.SUBTASK.toString()) ? Integer.valueOf(parts[8]) : null;
+        Integer idOfEpic = type.equals(TaskType.SUBTASK.toString()) ? Integer.valueOf(parts[8]) : null;
 
 
         switch (type) {
@@ -207,7 +198,6 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         }
 
         return manager;
-
     }
 
     private void save() {
@@ -228,15 +218,4 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
             System.out.print("Ошибка");
         }
     }
-    /*public Set<Task> getPrioritizedTasks() {
-        return taskTreeSet;
-    }*/
-
-    /*public void printSortedTaskList() {
-        System.out.println(taskTreeSet.toString());
-    }*/
-
-    /*public boolean areTasksOverlapping(Task task1, Task task2) {
-        return task1.getStartTime().isBefore(task2.getEndTime()) && task2.getStartTime().isBefore(task1.getEndTime());
-    }*/
 }

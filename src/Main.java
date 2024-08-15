@@ -1,3 +1,4 @@
+import exception.TaskOverlapException;
 import managers.*;
 import task.Epic;
 import task.Subtask;
@@ -78,7 +79,7 @@ public class Main {
         fileBackedTaskManager.initEpicDuration(epic1, subtask1, subtask2);
         //epic1.setDuration((Duration.between(subtask1.getStartTime(), subtask2.getEndTime())));
 
-        if (fileBackedTaskManager.addEpic(epic1) != 0) {
+        try {
             fileBackedTaskManager.addEpic(epic1);
             subtask1.setEpicId(epic1.getId());
             subtask2.setEpicId(epic1.getId());
@@ -86,7 +87,7 @@ public class Main {
         System.out.println(subtask2.getEpicId());*/
             fileBackedTaskManager.addSubtusk(subtask1);
             fileBackedTaskManager.addSubtusk(subtask2);
-        } else {
+        } catch (Exception e){
             System.out.println("Из за наложения эпика неавозможно добавить его");
         }
         System.out.println(fileBackedTaskManager.getSimpleTaskList());

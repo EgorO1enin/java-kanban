@@ -9,9 +9,9 @@ public class Task {
     protected String taskname;
     protected Status status;
     protected String description;
-    private Type type = Type.TASK;
-    private Duration duration;
-    private LocalDateTime startTime;
+    protected TaskType type = TaskType.TASK;
+    protected Duration duration;
+    protected LocalDateTime startTime;
 
     public Task(String taskname, String description, LocalDateTime startTime, Duration duration) {
         this.taskname = taskname;
@@ -31,11 +31,11 @@ public class Task {
         return startTime.plus(duration);
     }
 
-    public Type getType() {
+    public TaskType getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    public void setType(TaskType type) {
         this.type = type;
     }
 

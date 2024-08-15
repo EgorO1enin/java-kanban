@@ -8,20 +8,19 @@ import task.Task;
 import java.time.Duration;
 import java.util.*;
 
-// Должен стать интерфейсом
 public class InMemoryTaskManager implements TaskManager {
-    private final HistoryManager historyManager = new InMemoryHistoryManager();
+    private final HistoryManager historyManager = Managers.getHistoryManager();
     int taskId = 1;
     protected final HashMap<Integer, Task> tasksList = new HashMap<>();
     protected final HashMap<Integer, Epic>  epicsList = new HashMap<>();
     protected final HashMap<Integer, Subtask> subtasksList = new HashMap<>();
-    CompareTasks compareTasks = new CompareTasks();
+    private final TaskStartTimeComparator compareTasks = new TaskStartTimeComparator();
     protected TreeSet<Task> taskTreeSet = new TreeSet<>(compareTasks);
 
     @Override
     public int addTask(Task task) {
         boolean hasOverlap = taskTreeSet.stream().anyMatch(existingTask -> areTasksOverlapping(existingTask, task));
-        if (!hasOverlap) {
+         if (!hasOverlap) {
             addTaskToSortedTreeSet(task);
             task.setId(taskId);
             taskId++;

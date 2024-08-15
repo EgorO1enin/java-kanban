@@ -4,6 +4,11 @@ import task.Subtask;
 import task.Task;
 import org.junit.jupiter.api.Test;
 
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class InMemoryTaskManagerTest {
@@ -20,6 +25,18 @@ class InMemoryTaskManagerTest {
         taskManager.addTask(task1);
         assertNotNull(taskManager.getSimpleTaskList(), "Не добавляет тип данных Tasks.Task");
 
+    }
+
+    @Test
+    public void TaskShouldBeNull(){
+        Task task = new Task("test1", "test1");
+        task.setStartTime(LocalDateTime.now());
+        task.setDuration(Duration.ofMinutes(2));
+        Task task2 = new Task("test2", "test2");
+        task2.setStartTime(LocalDateTime.now());
+        task2.setDuration(Duration.ofMinutes(2));
+        taskManager.addTask(task);
+        assertEquals(taskManager.addTask(task2), 0);
     }
 
     @Test

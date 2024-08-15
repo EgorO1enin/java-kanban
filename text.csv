@@ -1,7 +1,2 @@
 id,type,name,status,description,start time, end time, duration, epic
-1,TASK,Test 1,NEW,To be there at 3 AM,2024-08-14T11:02,2024-08-14T11:12,10,
-2,TASK,Test 3,NEW,To be there at 3 AM,2024-08-14T12:00,2024-08-14T12:10,10,
-3,TASK,Test 4,NEW,To be there at 3 AM,2024-08-14T13:00,2024-08-14T13:10,10,
-4,EPIC,Fix Bug,NEW,this bug is on main page of site,2024-08-14T15:00,2024-08-14T15:40,40,
-5,SUBTASK,To solve the problem with payment,NEW,Description,2024-08-14T15:00,2024-08-14T15:10,10,4
-6,SUBTASK,To solve the problem with payment2,NEW,Description,2024-08-14T15:00,2024-08-14T15:40,40,4
+1,TASK,Test 1,NEW,To be there at 3 AM,2024-08-16T11:02,2024-08-16T11:12,10,
