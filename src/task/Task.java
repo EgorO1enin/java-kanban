@@ -1,5 +1,7 @@
-package Tasks;
+package task;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Task {
@@ -7,6 +9,35 @@ public class Task {
     protected String taskname;
     protected Status status;
     protected String description;
+    protected TaskType type = TaskType.TASK;
+    protected Duration duration;
+    protected LocalDateTime startTime;
+
+    public Task(String taskname, String description, LocalDateTime startTime, Duration duration) {
+        this.taskname = taskname;
+        this.status = Status.NEW;
+        this.description = description;
+        this.startTime = startTime;
+        this.duration = duration;
+    }
+
+    public Task(String taskname, String description) {
+        this.taskname = taskname;
+        this.status = Status.NEW;
+        this.description = description;
+    }
+
+    public LocalDateTime getEndTime() {
+        return startTime.plus(duration);
+    }
+
+    public TaskType getType() {
+        return type;
+    }
+
+    public void setType(TaskType type) {
+        this.type = type;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -19,12 +50,6 @@ public class Task {
     @Override
     public int hashCode() {
         return Objects.hash(id, taskname, status, description);
-    }
-
-    public Task(String taskname, String description) {
-        this.taskname = taskname;
-        this.status = Status.NEW;
-        this.description = description;
     }
 
     @Override
@@ -63,6 +88,22 @@ public class Task {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Duration getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Duration duration) {
+        this.duration = duration;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
     }
 }
 

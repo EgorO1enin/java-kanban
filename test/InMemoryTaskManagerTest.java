@@ -1,9 +1,13 @@
-package Managers;
-
-import Tasks.Epic;
-import Tasks.Subtask;
-import Tasks.Task;
+import managers.InMemoryTaskManager;
+import task.Epic;
+import task.Subtask;
+import task.Task;
 import org.junit.jupiter.api.Test;
+
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,41 +21,53 @@ class InMemoryTaskManagerTest {
             "Написать что то ", taskManager.addEpic(epic1));
 
     @Test
-    public void shouldNotBeNullWhenTMAddTask(){
+    public void shouldNotBeNullWhenTMAddTask() {
         taskManager.addTask(task1);
         assertNotNull(taskManager.getSimpleTaskList(), "Не добавляет тип данных Tasks.Task");
 
     }
 
     @Test
-    public void shouldNotBeNullWhenTMAddEpic(){
+    public void TaskShouldBeNull(){
+        Task task = new Task("test1", "test1");
+        task.setStartTime(LocalDateTime.now());
+        task.setDuration(Duration.ofMinutes(2));
+        Task task2 = new Task("test2", "test2");
+        task2.setStartTime(LocalDateTime.now());
+        task2.setDuration(Duration.ofMinutes(2));
+        taskManager.addTask(task);
+        assertEquals(taskManager.addTask(task2), 0);
+    }
+
+    @Test
+    public void shouldNotBeNullWhenTMAddEpic() {
         taskManager.addEpic(epic1);
         assertNotNull(taskManager.getEpicTaskList(), "Не добавляет тип данных Tasks.Task");
 
     }
 
     @Test
-    public void shouldNotBeNullWhenTMAddSubtask(){
+    public void shouldNotBeNullWhenTMAddSubtask() {
         taskManager.addSubtusk(subtask1);
         assertNotNull(taskManager.getSubTaskList(), "Не добавляет тип данных Tasks.Task");
 
     }
 
     @Test
-    public void shouldBeEqualsBeforeAndAfterAddTask(){
+    public void shouldBeEqualsBeforeAndAfterAddTask() {
         taskManager.addTask(task1);
         assertEquals(task1, taskManager.getSimpleTaskList().get(2));
     }
 
     @Test
-    public void shouldNotBeEqualsWhenWeSearchByIndex(){
+    public void shouldNotBeEqualsWhenWeSearchByIndex() {
         taskManager.addTask(task1);
         Task ret = taskManager.getTaskById(2);
         assertEquals(task1, ret);
     }
 
     @Test
-    public void genId(){
+    public void genId() {
         Task task1 = new Task("Tasks.Task 1", "testing task");
         taskManager.addTask(task1);
     }
