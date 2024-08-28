@@ -20,6 +20,7 @@ public class HttpTaskServer {
         server.createContext("/prioritized", new PrioritizedHandler());
 
     }
+
     public static void main(String[] args) throws IOException {
         HttpTaskServer server1 = new HttpTaskServer();
         server1.startServer();
