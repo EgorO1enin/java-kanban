@@ -27,35 +27,34 @@ public class InMemoryTaskManager implements TaskManager {
             tasksList.put(task.getId(), task);
             return task.getId();
         } else {
-            System.out.println("Происходит наложение Task");
             return 0;
         }
     }
 
     @Override
     public int addEpic(Epic epTask) {
-        boolean hasOverlap = taskTreeSet.stream().anyMatch(existingTask -> areTasksOverlapping(existingTask, epTask));
-        if (!hasOverlap) {
+        //boolean hasOverlap = taskTreeSet.stream().anyMatch(existingTask -> areTasksOverlapping(existingTask, epTask));
             addTaskToSortedTreeSet(epTask);
             epTask.setId(taskId);
             taskId++;
             epicsList.put(epTask.getId(), epTask);
             return epTask.getId();
-        } else {
-            System.out.println("Происходит наложение Epic");
-            return 0;
-        }
     }
 
     @Override
     public int addSubtusk(Subtask subTask) {
-        addTaskToSortedTreeSet(subTask);
-        subTask.setId(taskId);
-        Epic epic = epicsList.get(subTask.getEpicId());
-        epic.setSubTaskList(taskId);
-        taskId++;
-        subtasksList.put(subTask.getId(), subTask);
-        return subTask.getId();
+        boolean hasOverlap = taskTreeSet.stream().anyMatch(existingTask -> areTasksOverlapping(existingTask, subTask));
+        if (!hasOverlap) {
+            addTaskToSortedTreeSet(subTask);
+            subTask.setId(taskId);
+            Epic epic = epicsList.get(subTask.getEpicId());
+            epic.setSubTaskList(taskId);
+            taskId++;
+            subtasksList.put(subTask.getId(), subTask);
+            return subTask.getId();
+        } else {
+            return 0;
+        }
     }
 
     @Override
@@ -69,10 +68,17 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public void deleteTaskByInd(int index) {
         if (tasksList.containsKey(index)) {
+            taskTreeSet.remove(tasksList.get(index));
             tasksList.remove(index);
         } else if (epicsList.containsKey(index)) {
+            List<Integer> list = epicsList.get(index).getSubTaskList();
             epicsList.remove(index);
+            for (int ind : list) {
+                taskTreeSet.remove(subtasksList.get(ind));
+                deleteTaskByInd(ind);
+            }
         } else if (subtasksList.containsKey(index)) {
+            taskTreeSet.remove(subtasksList.get(index));
             subtasksList.remove(index);
         } else {
             System.out.println("Задача под таким индексом не найдена!");
@@ -99,9 +105,21 @@ public class InMemoryTaskManager implements TaskManager {
         return epicsList.get(id);
     }
 
+    public Epic getEpicByIdForEpicDuration(int id) {
+        return epicsList.get(id);
+    }
+
     @Override
     public Task getSubtaskById(int id) {
         historyManager.add(subtasksList.get(id));
+        return subtasksList.get(id);
+    }
+
+    public Task getSubtaskByIdForSubtask(int id) {
+        return subtasksList.get(id);
+    }
+
+    public Subtask getSubtaskByIdForEpicDuration(int id){
         return subtasksList.get(id);
     }
 
