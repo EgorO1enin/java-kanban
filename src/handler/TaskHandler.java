@@ -72,7 +72,7 @@ public class TaskHandler implements HttpHandler {
                     httpExchange.close();*/
                     try {
                         String requestBody;
-                        try (InputStreamReader isr = new InputStreamReader(httpExchange.getRequestBody(), StandardCharsets.UTF_8)){
+                        try (InputStreamReader isr = new InputStreamReader(httpExchange.getRequestBody(), StandardCharsets.UTF_8)) {
                             StringBuilder stringBuilder = new StringBuilder();
                             char[] buffer = new char[1024];
                             int read;
@@ -104,30 +104,6 @@ public class TaskHandler implements HttpHandler {
                         e.printStackTrace();
                         httpExchange.close();
                     }
-                    /*Gson gson = new GsonBuilder()
-                            .registerTypeAdapter(Duration.class, new DurationAdapter())
-                            .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
-                            .registerTypeAdapter(Task.class, new TaskAdapter())
-                            .setPrettyPrinting()
-                            .create();
-                    String stringRequestBody;
-                    //Для логирования запроса
-                    try (InputStream is = httpExchange.getRequestBody();
-                         InputStreamReader isr = new InputStreamReader(is, StandardCharsets.UTF_8);
-                         BufferedReader br = new BufferedReader(isr)) {
-                        StringBuilder sb = new StringBuilder();
-                        String line;
-                        while ((line = br.readLine()) != null) {
-                            sb.append(line);
-                        }
-                        stringRequestBody = sb.toString();
-                    }
-                    System.out.println("Received JSON: " + stringRequestBody);
-                    Task task = gson.fromJson(stringRequestBody, Task.class);
-                    taskManager.addTask(task);
-                    httpExchange.sendResponseHeaders(200, 0);
-                    System.out.println(task + " added");
-                    httpExchange.close();*/
                     break;
                 }
                     case "DELETE": {
@@ -154,7 +130,7 @@ public class TaskHandler implements HttpHandler {
                         break;
 
                     }
-                default:{
+                default: {
                     System.out.println("Ждем пост гет или делит запрос а получили -" + httpExchange.getRequestMethod());
                     httpExchange.sendResponseHeaders(405, 0);
                     httpExchange.close();

@@ -61,7 +61,7 @@ public class EpicHandler extends TaskHandler {
                 case "POST": {
                     try {
                         String requestBody;
-                        try (InputStreamReader isr = new InputStreamReader(httpExchange.getRequestBody(), StandardCharsets.UTF_8)){
+                        try (InputStreamReader isr = new InputStreamReader(httpExchange.getRequestBody(), StandardCharsets.UTF_8)) {
                             StringBuilder stringBuilder = new StringBuilder();
                             char[] buffer = new char[1024];
                             int read;
@@ -108,7 +108,7 @@ public class EpicHandler extends TaskHandler {
                     break;
 
                 }
-                default:{
+                default: {
                     System.out.println("Ждем пост гет или делит запрос а получили -" + httpExchange.getRequestMethod());
                     httpExchange.sendResponseHeaders(405, 0);
                     httpExchange.close();
