@@ -1,11 +1,11 @@
-package Handlers;
+package handler;
 
 import com.google.gson.*;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import managers.InMemoryTaskManager;
-import Adapters.DurationAdapter;
-import Adapters.LocalDateTimeAdapter;
+import adapters.DurationAdapter;
+import adapters.LocalDateTimeAdapter;
 import task.Task;
 
 import java.io.*;

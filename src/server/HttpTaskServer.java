@@ -1,6 +1,6 @@
 package server;
 
-import Handlers.*;
+import handler.*;
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
@@ -16,7 +16,7 @@ public class HttpTaskServer {
         server.createContext("/tasks", new TaskHandler());
         server.createContext("/subtasks", new SubtaskHandler());
         server.createContext("/Epics", new EpicHandler());
-        server.createContext("/history", new historyHandler());
+        server.createContext("/history", new HistoryHandler());
         server.createContext("/prioritized", new PrioritizedHandler());
 
     }

@@ -1,9 +1,9 @@
-package Handlers;
+package handler;
 
 import com.google.gson.*;
 import com.sun.net.httpserver.HttpExchange;
-import Adapters.DurationAdapter;
-import Adapters.LocalDateTimeAdapter;
+import adapters.DurationAdapter;
+import adapters.LocalDateTimeAdapter;
 import task.Epic;
 
 import java.io.*;

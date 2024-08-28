@@ -5,9 +5,9 @@ import managers.TaskManager;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
-import Adapters.DurationAdapter;
+import adapters.DurationAdapter;
 import server.HttpTaskServer;
-import Adapters.LocalDateTimeAdapter;
+import adapters.LocalDateTimeAdapter;
 import task.Task;
 
 import java.io.IOException;
