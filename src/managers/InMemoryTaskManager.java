@@ -119,7 +119,7 @@ public class InMemoryTaskManager implements TaskManager {
         return subtasksList.get(id);
     }
 
-    public Subtask getSubtaskByIdForEpicDuration(int id){
+    public Subtask getSubtaskByIdForEpicDuration(int id) {
         return subtasksList.get(id);
     }
 
@@ -221,16 +221,5 @@ public class InMemoryTaskManager implements TaskManager {
     public void initEpicDuration(Epic epic, Subtask firstSub, Subtask lastSub) {
        epic.setDuration(Duration.between(firstSub.getStartTime(), lastSub.getEndTime()));
     }
-
-
-
-
-
-
-
-
-
-
-
 }
 
