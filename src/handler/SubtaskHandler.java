@@ -67,7 +67,7 @@ public class SubtaskHandler extends TaskHandler {
                 case "POST": {
                     try {
                         String requestBody;
-                        try (InputStreamReader isr = new InputStreamReader(httpExchange.getRequestBody(), StandardCharsets.UTF_8)){
+                        try (InputStreamReader isr = new InputStreamReader(httpExchange.getRequestBody(), StandardCharsets.UTF_8)) {
                             StringBuilder stringBuilder = new StringBuilder();
                             char[] buffer = new char[1024];
                             int read;
@@ -79,14 +79,15 @@ public class SubtaskHandler extends TaskHandler {
 
                         Subtask subtask = gson.fromJson(requestBody, Subtask.class);
                         Epic epic = (Epic) taskManager.getEpicById(subtask.getEpicId());
-                        if (taskManager.addSubtusk(subtask) == 0){
+                        if (taskManager.addSubtusk(subtask) == 0) {
                             httpExchange.sendResponseHeaders(406, 0);
                             httpExchange.close();
                         } else {
                             taskManager.addSubtusk(subtask);
                             taskManager.addTaskToSortedTreeSet(subtask);
-                            taskManager.initEpicDuration(epic, taskManager.getSubtaskByIdForEpicDuration
-                                    (epic.getSubTaskList().getFirst()), taskManager.getSubtaskByIdForEpicDuration(epic.getSubTaskList().getLast()));
+                            taskManager.initEpicDuration(epic, taskManager
+                                    .getSubtaskByIdForEpicDuration(epic.getSubTaskList().getFirst()), taskManager
+                                    .getSubtaskByIdForEpicDuration(epic.getSubTaskList().getLast()));
                             taskManager.updateEpic(epic);
                             httpExchange.sendResponseHeaders(200, 0);
                             httpExchange.close();
@@ -127,7 +128,7 @@ public class SubtaskHandler extends TaskHandler {
                     }
                     break;
                 }
-                default:{
+                default: {
                     System.out.println("Ждем пост гет или делит запрос а получили -" + httpExchange.getRequestMethod());
                     httpExchange.sendResponseHeaders(405, 0);
                     httpExchange.close();
