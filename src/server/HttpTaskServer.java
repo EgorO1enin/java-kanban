@@ -26,11 +26,11 @@ public class HttpTaskServer {
         System.out.println("Server started at port: " + PORT);
     }
 
-    public void startServer(){
+    public void startServer() {
         server.start();
     }
 
-    public void stopServer(){
+    public void stopServer() {
         server.stop(0);
     }
 }
