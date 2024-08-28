@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
 
 public class TaskHandler implements HttpHandler {
     public static InMemoryTaskManager taskManager = new InMemoryTaskManager();
+
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
         String response;
@@ -23,8 +24,6 @@ public class TaskHandler implements HttpHandler {
                 .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
                 .registerTypeAdapter(Duration.class, new DurationAdapter())
                 .create();
-
-
         try {
             switch (httpExchange.getRequestMethod()) {
                 case "GET": {
