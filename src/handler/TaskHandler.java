@@ -63,12 +63,6 @@ public class TaskHandler implements HttpHandler {
                     break;
                 }
                 case "POST": {
-                    /*taskManager.addTask(new Task("rgserg", "wqrfqrfqwrf",
-                            LocalDateTime.of(LocalDate.now(), LocalTime.parse("11:02")), Duration.ofMinutes(1)));
-                    taskManager.addTask(new Task("rgservqwrgerg", "rgqq3rgqwrg",
-                            LocalDateTime.of(LocalDate.now(), LocalTime.parse("13:02")), Duration.ofMinutes(1)));
-                    httpExchange.sendResponseHeaders(200, 0);
-                    httpExchange.close();*/
                     try {
                         String requestBody;
                         try (InputStreamReader isr = new InputStreamReader(httpExchange.getRequestBody(), StandardCharsets.UTF_8)) {
@@ -81,6 +75,10 @@ public class TaskHandler implements HttpHandler {
                             requestBody = stringBuilder.toString();
                         }
                         Task task = gson.fromJson(requestBody, Task.class);
+                        if (task.getStartTime()== null) {
+                            task.setStartTime(LocalDateTime.now());
+                            task.setDuration(Duration.ofMinutes(5));
+                        }
                         if (!requestBody.contains("id")) {
                             if (taskManager.addTask(task) == 0) {
                                 httpExchange.sendResponseHeaders(406, 0);

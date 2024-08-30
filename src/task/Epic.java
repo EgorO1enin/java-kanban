@@ -41,9 +41,9 @@ public class Epic extends Task {
         subTaskList.add(id);
     }
 
-    /*//public void setSubTaskList(ArrayList<Integer> subTaskList) {
-        this.subTaskList = subTaskList;
-    }*/
+    public void deleteSubtaskFromEpic(Subtask subtask) {
+        subTaskList.remove(subtask);
+    }
 
     @Override
     public LocalDateTime getEndTime() {

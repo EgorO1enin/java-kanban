@@ -23,7 +23,7 @@ public class EpicHandler extends TaskHandler {
         try {
             switch (httpExchange.getRequestMethod()) {
                 case "GET": {
-                    if (Pattern.matches("^/Epics$", httpExchange.getRequestURI().getPath())) {
+                    if (Pattern.matches("^/epics$", httpExchange.getRequestURI().getPath())) {
                         if (taskManager.getEpicTaskList().isEmpty()) {
                             response = "Список Epic пуст! Пожалуйста добавьте Epic!";
                         } else {
@@ -86,7 +86,7 @@ public class EpicHandler extends TaskHandler {
                 }
                 case "DELETE": {
                     String taskId = httpExchange.getRequestURI().getPath()
-                            .replaceFirst("/Epics/", "");
+                            .replaceFirst("/epics/", "");
                     boolean found = false;
                     for (int id : taskManager.getEpicTaskList().keySet()) {
                         if (id == Integer.parseInt(taskId)) {

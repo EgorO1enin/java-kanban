@@ -122,6 +122,7 @@ public class SubtaskHandler extends TaskHandler {
                     } else {
                         Subtask subtask = (Subtask) taskManager.getSubtaskByIdForSubtask(Integer.parseInt(taskId));
                         Epic epic = (Epic) taskManager.getEpicById(subtask.getEpicId());
+                        epic.deleteSubtaskFromEpic(subtask);
                         taskManager.updateEpic(epic);
                         httpExchange.sendResponseHeaders(200, 0);
                         httpExchange.close();

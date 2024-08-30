@@ -19,7 +19,6 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     @Override
     public int addTask(Task task) {
         super.addTask(task);
-        //addTaskToSortedTreeSet(task);
         save();
         return task.getId();
     }
@@ -27,7 +26,6 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     @Override
     public int addEpic(Epic epTask) {
         super.addEpic(epTask);
-        //addTaskToSortedTreeSet(epTask);
         save();
         return epTask.getId();
     }

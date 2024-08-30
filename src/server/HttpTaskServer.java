@@ -8,14 +8,14 @@ import java.net.InetSocketAddress;
 
 
 public class HttpTaskServer {
-    private static final int PORT = 8085;
+    private static final int PORT = 8086;
     public static HttpServer server;
 
     public HttpTaskServer() throws IOException {
         server = HttpServer.create(new InetSocketAddress(PORT), 0);
         server.createContext("/tasks", new TaskHandler());
         server.createContext("/subtasks", new SubtaskHandler());
-        server.createContext("/Epics", new EpicHandler());
+        server.createContext("/epics", new EpicHandler());
         server.createContext("/history", new HistoryHandler());
         server.createContext("/prioritized", new PrioritizedHandler());
 

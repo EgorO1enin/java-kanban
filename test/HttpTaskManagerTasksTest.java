@@ -51,12 +51,6 @@ public class HttpTaskManagerTasksTest {
         // создаём задачу
         // конвертируем её в JSON
         Task task = new Task("taskName", "ddesc", LocalDateTime.now(), Duration.ofMinutes(15));
-        /*String taskJson = "{"
-                + "\"taskname\": \"Test 2\","
-                + "\"description\": \"Testing task 2\","
-                + "\"startTime\": \"24.12.2022 22:00\","
-                + "\"duration\": \"PT5M\""
-                + "}";*/
         String json = gson.toJson(task);
         // создаём HTTP-клиент и запрос
         HttpClient client = HttpClient.newHttpClient();

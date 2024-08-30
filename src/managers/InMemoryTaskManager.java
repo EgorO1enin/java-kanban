@@ -21,11 +21,11 @@ public class InMemoryTaskManager implements TaskManager {
     public int addTask(Task task) {
         boolean hasOverlap = taskTreeSet.stream().anyMatch(existingTask -> areTasksOverlapping(existingTask, task));
          if (!hasOverlap) {
-            addTaskToSortedTreeSet(task);
             task.setId(taskId);
             taskId++;
             tasksList.put(task.getId(), task);
-            return task.getId();
+            addTaskToSortedTreeSet(task);
+             return task.getId();
         } else {
             return 0;
         }
@@ -33,7 +33,6 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public int addEpic(Epic epTask) {
-        //boolean hasOverlap = taskTreeSet.stream().anyMatch(existingTask -> areTasksOverlapping(existingTask, epTask));
             addTaskToSortedTreeSet(epTask);
             epTask.setId(taskId);
             taskId++;
