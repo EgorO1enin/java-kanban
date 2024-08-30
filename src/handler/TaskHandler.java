@@ -75,7 +75,7 @@ public class TaskHandler implements HttpHandler {
                             requestBody = stringBuilder.toString();
                         }
                         Task task = gson.fromJson(requestBody, Task.class);
-                        if (task.getStartTime()== null) {
+                        if (task.getStartTime() == null) {
                             task.setStartTime(LocalDateTime.now());
                             task.setDuration(Duration.ofMinutes(5));
                         }
