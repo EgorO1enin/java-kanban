@@ -48,8 +48,7 @@ public class HttpTaskManagerTasksTest {
 
     @Test
     public void testAddTask() throws IOException, InterruptedException {
-        // создаём задачу
-        // конвертируем её в JSON
+        // конвертируем задачу в JSON
         Task task = new Task("taskName", "ddesc", LocalDateTime.now(), Duration.ofMinutes(15));
         String json = gson.toJson(task);
         // создаём HTTP-клиент и запрос
