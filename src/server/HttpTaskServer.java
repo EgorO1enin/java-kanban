@@ -8,7 +8,7 @@ import java.net.InetSocketAddress;
 
 
 public class HttpTaskServer {
-    private static final int PORT = 8086;
+    private static final int PORT = 8085;
     public static HttpServer server;
 
     public HttpTaskServer() throws IOException {
