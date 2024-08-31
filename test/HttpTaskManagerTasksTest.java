@@ -56,12 +56,10 @@ public class HttpTaskManagerTasksTest {
         HttpClient client = HttpClient.newHttpClient();
         URI url = URI.create("http://localhost:8085/tasks");
         HttpRequest request = HttpRequest.newBuilder().uri(url).POST(HttpRequest.BodyPublishers.ofString(json)).build();
-
         // вызываем рест, отвечающий за создание задач
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         // проверяем код ответа
         assertEquals(200, response.statusCode());
-
         // проверяем, что создалась одна задача с корректным именем
         assertNotNull(taskManager.getSimpleTaskList(), "Задачи не возвращаются");
     }
@@ -74,11 +72,8 @@ public class HttpTaskManagerTasksTest {
         URI url = URI.create("http://localhost:8085/tasks");
         HttpRequest request = HttpRequest.newBuilder().uri(url).GET().build();
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
         assertEquals(200, response.statusCode());
         assertNotNull(taskManager.getSimpleTaskList(), "Задачи не возвращаются");
         assertEquals(1, taskManager.getSimpleTaskList().size(), "Некорректное количество задач");
-
-
     }
 }
