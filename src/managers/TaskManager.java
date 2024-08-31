@@ -1,13 +1,13 @@
-package Managers;
+package managers;
 
-import Tasks.Epic;
-import Tasks.Status;
-import Tasks.Subtask;
-import Tasks.Task;
-
+import task.Epic;
+import task.Status;
+import task.Subtask;
+import task.Task;
 import java.util.HashMap;
+import java.util.List;
 
-public interface ТaskManager {
+public interface TaskManager {
     int addTask(Task task);
 
     int addEpic(Epic epTask);
@@ -31,4 +31,14 @@ public interface ТaskManager {
     void updateEpic(Epic epic);
 
     void updateSubtask(Subtask subtask);
+
+    Task getTaskById(int id);
+
+    Task getEpicById(int id);
+
+    Task getSubtaskById(int id);
+
+    List<Task> getAllHistory();
+
+    void removeTaskFromHistory(int id);
 }
